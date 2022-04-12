@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SelectBox from './selectbox';
 
 const questionData = (data) => {
     return (
         <>
             {data.map((d) => (
                 <div key={d.id} className='question-wrapper'>
-                    {d.text}
+                    {d.text.replace(/<\/?[^>]+(>|$)/g, '')}
                 </div>
             ))}
         </>
     )
 }
+
+// const answerData = (data) => {
+//     const [toggle, setToggle] = useState(false);
+//     // option-selected
+
+//     let queAnswers = [];
+//     for (let i = 0, len = data.length; i < len; i++){
+//         queAnswers.push(data[i].answers)
+//     }
+    
+//     return(
+//         <div className='select'>
+//             {queAnswers[0].map(d => (
+//                 <div key={d.id} className='option'>{d.text.replace(/<\/?[^>]+(>|$)/g, '')}</div>
+//             ))}
+//         </div>
+//     )
+// }
 
 
 const QuizItems = (props) => {
@@ -58,12 +77,7 @@ const QuizItems = (props) => {
                 status as a protected veteran, status as an individual with a disability, genetic information, political views or activity, or other applicable legally protected characteristics.</p>
             </div>
             <div className='right-side'>
-                <div className='select'>
-                    <div className='option'>Sokoto</div>
-                    <div className='option option-selected'>Rivers State</div>
-                    <div className='option'>Jos</div>
-                    <div className='option'>Abia</div>
-                </div>
+                <SelectBox {...data} />
                 <div className='btn-wrap'>
                     <button onClick={handlePrevClick} className='btn-previous'>Previous</button>
                     <button onClick={handleNextClick} className='btn-next'>Next</button>
